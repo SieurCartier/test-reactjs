@@ -33,8 +33,11 @@ class PhoneList extends Component {
     }
 
     render() {
+        let filteredPhones = this.state.phones.filter((phone) => {
+            let regex = new RegExp(this.state.query, 'i');
+            return regex.test(phone.name);
+        });
         return (
-
             <div className="container-fluid">
                 <div className="row">
                     <div className="col-md-2">
@@ -54,7 +57,7 @@ class PhoneList extends Component {
                     </div>
                     <div className="col-md-10">
                         <ul className="phones">
-                            {this.state.phones.map((phone, i) => <Phone key={i} phone={phone}/>)}
+                            {filteredPhones.map((phone, i) => <Phone key={i} phone={phone}/>)}
                         </ul>
                     </div>
                 </div>
