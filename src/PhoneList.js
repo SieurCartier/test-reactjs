@@ -37,6 +37,15 @@ class PhoneList extends Component {
             let regex = new RegExp(this.state.query, 'i');
             return regex.test(phone.name);
         });
+
+        filteredPhones.sort((a, b) => {
+            if (this.state.orderProp === 'age') {
+                return a[this.state.orderProp] > b[this.state.orderProp];
+            } else {
+                return a[this.state.orderProp].localeCompare(b[this.state.orderProp]);
+            }
+        });
+
         return (
             <div className="container-fluid">
                 <div className="row">
