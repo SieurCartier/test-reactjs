@@ -1,12 +1,5 @@
 import React, {Component} from 'react';
-
-/**
- * @return {string}
- */
-const Checkmark = ({value}) => {
-    return (value ? '\u2713' : '\u2718');
-}
-
+import Checkmark from 'Checkmark' ;
 
 class PhoneDetails extends Component {
     constructor(props) {
