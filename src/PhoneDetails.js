@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Checkmark from 'Checkmark' ;
+import Checkmark from './Checkmark' ;
 
 class PhoneDetails extends Component {
     constructor(props) {
@@ -9,18 +9,19 @@ class PhoneDetails extends Component {
             mainImageUrl: ''
         };
 
-        fetch('https://raw.githubusercontent.com/angular/angular-phonecat/master/app/phones/' + this.props.match.params.phoneId + '.json')
+        fetch('../Phones/' + this.props.match.params.phoneId + '.json')
             .then(response => response.json())
             .then(json => this.setState({
-                phoneDetails: json,
-                mainImageUrl: json.images[0]
-            }));
+                    phoneDetails: json,
+                    mainImageUrl: json.images[0]
+                })
+            );
     }
 
     render() {
         return (
             <div>
-                <img src={'https://github.com/angular/angular-phonecat/raw/master/app/' + this.state.mainImageUrl}
+                <img src={'../' + this.state.mainImageUrl}
                      className='phone' alt={this.state.phoneDetails.name}/>
                 <h1>{this.state.phoneDetails.name}</h1>
 
@@ -29,10 +30,11 @@ class PhoneDetails extends Component {
                 <ul className='phone-thumbs'>
                     {this.state.phoneDetails.images &&
                     this.state.phoneDetails.images.map((image, i) =>
-                        <li>
-                            <img src={'https://github.com/angular/angular-phonecat/raw/master/app/' + image }
+                        <li key={i}>
+                            <img src={'../' + image }
                                  alt={image}
                                  onClick={() => this.setState({mainImageUrl: image})}
+                                 key={i}
                             />
                         </li>
                     )}
@@ -44,7 +46,8 @@ class PhoneDetails extends Component {
                         <dl>
                             <dt>Availability</dt>
                             {this.state.phoneDetails.availability &&
-                            this.state.phoneDetails.availability.map((availability, i) => <dd>{availability}</dd>)}
+                            this.state.phoneDetails.availability.map((availability, i) => <dd
+                                key={i}>{availability}</dd>)}
                         </dl>
                     </li>
                     <li>
@@ -107,7 +110,7 @@ class PhoneDetails extends Component {
                             <dt>Dimensions</dt>
                             {this.state.phoneDetails.sizeAndWeight.dimensions &&
                             this.state.phoneDetails.sizeAndWeight.dimensions.map((dim, i) =>
-                                <dd>{dim}</dd>)}
+                                <dd key={i}>{dim}</dd>)}
                             <dt>Weight</dt>
                             <dd>{this.state.phoneDetails.sizeAndWeight.weight}</dd>
                         </dl>

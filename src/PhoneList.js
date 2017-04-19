@@ -4,14 +4,12 @@ import {Link} from 'react-router-dom'
 function Phone(props) {
     return (
         <li className="thumbnail">
-            <Link to={'/details/' + props.phone.id}>
-                <a href="#" className="thumb">
-                    <img src={'https://github.com/angular/angular-phonecat/raw/master/app/' + props.phone.imageUrl}
-                         alt={props.phone.name}/>
-                </a>
+            <Link to={'/details/' + props.phone.id} className="thumb">
+                <img src={'./' + props.phone.imageUrl}
+                     alt={props.phone.name}/>
             </Link>
             <Link to={'/details/' + props.phone.id}>
-                <a href="#">{props.phone.name}</a>
+                {props.phone.name}
             </Link>
             <p>{props.phone.snippet}</p>
         </li>
@@ -27,7 +25,7 @@ class PhoneList extends Component {
             orderProp: 'age'
         };
 
-        fetch('https://raw.githubusercontent.com/angular/angular-phonecat/master/app/phones/phones.json')
+        fetch('./Phones/phones.json')
             .then(response => response.json())
             .then(json => this.setState({phones: json}));
     }
