@@ -9,6 +9,9 @@ class PhoneDetails extends Component {
             mainImageUrl: ''
         };
 
+    }
+
+    componentDidMount() {
         fetch('../Phones/' + this.props.match.params.phoneId + '.json')
             .then(response => response.json())
             .then(json => this.setState({

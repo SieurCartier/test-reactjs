@@ -1,20 +1,5 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom'
-
-function Phone(props) {
-    return (
-        <li className="thumbnail">
-            <Link to={'/details/' + props.phone.id} className="thumb">
-                <img src={'./' + props.phone.imageUrl}
-                     alt={props.phone.name}/>
-            </Link>
-            <Link to={'/details/' + props.phone.id}>
-                {props.phone.name}
-            </Link>
-            <p>{props.phone.snippet}</p>
-        </li>
-    );
-}
+import Phone from './Phone';
 
 class PhoneList extends Component {
     constructor(props) {
@@ -24,7 +9,9 @@ class PhoneList extends Component {
             query: '',
             orderProp: 'age'
         };
+    }
 
+    componentDidMount() {
         fetch('./Phones/phones.json')
             .then(response => response.json())
             .then(json => this.setState({phones: json}));
